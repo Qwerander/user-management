@@ -12,6 +12,17 @@ export const UserForm = ({ addUser }: IUserForm) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    if (!firstName || !lastName) {
+      alert('Пожалуйста, заполните все поля формы');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert('Пожалуйста, введите действительный адрес электронной почты');
+      return;
+    }
+    
     const user = {
       firstName,
       lastName,
@@ -21,6 +32,11 @@ export const UserForm = ({ addUser }: IUserForm) => {
     setFirstName('');
     setLastName('');
     setEmail('');
+  };
+
+  const validateEmail = (email: string) => {
+    const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    return regex.test(email);
   };
 
   return (

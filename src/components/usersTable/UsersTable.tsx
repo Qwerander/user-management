@@ -1,6 +1,12 @@
 import { UsersType } from '../../types/types';
 
-export const UsersTable = ({ users }: { users: UsersType }) => {
+interface IUserTable {
+  users: UsersType
+  editUser: (value: number) => void
+  deleteUser: (value: number) => void
+}
+
+export const UsersTable = ({ users, editUser, deleteUser }: IUserTable) => {
   return (
     <table>
       <thead>
@@ -16,6 +22,10 @@ export const UsersTable = ({ users }: { users: UsersType }) => {
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
             <td>{user.email}</td>
+            <td>
+              <button onClick={() => editUser(index)}>Изменить</button>
+              <button onClick={() => deleteUser(index)}>Удалить</button>
+            </td>
           </tr>
         ))}
       </tbody>

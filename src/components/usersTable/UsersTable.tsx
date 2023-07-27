@@ -1,19 +1,20 @@
 import { UsersType } from '../../types/types';
+import styles from './usersTable.module.css';
 
 interface IUserTable {
-  users: UsersType
-  editUser: (value: number) => void
-  deleteUser: (value: number) => void
+  users: UsersType;
+  deleteUser: (value: number) => void;
 }
 
-export const UsersTable = ({ users, editUser, deleteUser }: IUserTable) => {
+export const UsersTable = ({ users, deleteUser }: IUserTable) => {
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
-          <th>Имя</th>
-          <th>Фамилия</th>
+          <th>First Name</th>
+          <th>Last Name</th>
           <th>Email</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -23,8 +24,9 @@ export const UsersTable = ({ users, editUser, deleteUser }: IUserTable) => {
             <td>{user.lastName}</td>
             <td>{user.email}</td>
             <td>
-              <button onClick={() => editUser(index)}>Изменить</button>
-              <button onClick={() => deleteUser(index)}>Удалить</button>
+              <button className={styles.btn} onClick={() => deleteUser(index)}>
+                delete
+              </button>
             </td>
           </tr>
         ))}
